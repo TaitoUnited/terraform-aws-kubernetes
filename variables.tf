@@ -14,25 +14,36 @@
  * limitations under the License.
  */
 
+variable "tags" {
+  type = map(string)
+  default = {}
+  description = "A mapping of tags to assign to all resources."
+}
+
 variable "user_profile" {
   type = string
+  description = "Name of the currectly active AWS user profile."
 }
 
 variable "email" {
   type = string
+  description = "Email address for DevOps support. This email is used to inform about expiring SSL certificates, etc."
 }
 
 variable "vpc_id" {
   type = string
+  description = "AWS virtual private cloud id (virtual network id)"
 }
 
 variable "private_subnets" {
   type = list(string)
+  description = "Subnets for Kubernetes nodes"
 }
 
 variable "additional_accounts" {
   type = list(string)
   default = []
+  description = "Additional AWS accounts that the Kubernetes RBAC should support."
 }
 
 /* TODO: not required? -> use permissions?
@@ -118,6 +129,7 @@ variable "generate_ingress_dhparam" {
 variable "use_kubernetes_as_db_proxy" {
   type        = bool
   default     = false
+  description = "Installs database proxies if set to true. Should be set to true only after Kubernetes cluster already exists."
 }
 
 variable "postgresql_cluster_names" {

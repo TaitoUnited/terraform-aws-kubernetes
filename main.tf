@@ -15,8 +15,7 @@
  */
 
 locals {
-  tags = {
-  }
+  tags = var.tags
 
   kubernetes_master_cidr   = "172.16.0.0/28"
 

@@ -157,6 +157,7 @@ Combine with the following modules to get a complete infrastructure defined by Y
 - [Admin](https://registry.terraform.io/modules/TaitoUnited/admin/aws)
 - [DNS](https://registry.terraform.io/modules/TaitoUnited/dns/aws)
 - [Network](https://registry.terraform.io/modules/TaitoUnited/network/aws)
+- [Compute](https://registry.terraform.io/modules/TaitoUnited/compute/aws)
 - [Kubernetes](https://registry.terraform.io/modules/TaitoUnited/kubernetes/aws)
 - [Databases](https://registry.terraform.io/modules/TaitoUnited/databases/aws)
 - [Storage](https://registry.terraform.io/modules/TaitoUnited/storage/aws)

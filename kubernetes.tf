@@ -76,7 +76,7 @@ module "kubernetes" {
   count                                = local.kubernetes != "" ? 1 : 0
 
   source                               = "terraform-aws-modules/eks/aws"
-  version                              = "14.0.0"
+  version                              = "17.22.0"
   cluster_name                         = local.kubernetes.name
   cluster_version                      = local.kubernetes.version
   subnets                              = var.private_subnets

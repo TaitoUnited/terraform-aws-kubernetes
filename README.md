@@ -89,7 +89,7 @@ permissions:
         - name: taito-developer
           subjects:
             - SOME_USER_ID
-            - ANOTHER_USER_ID            
+            - ANOTHER_USER_ID
 
 # For Kubernetes setting descriptions, see
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/
@@ -102,6 +102,10 @@ kubernetes:
     - instanceType: n1-standard-1
       minNodeCount: 1
       maxNodeCount: 1
+
+  # Certificate managers
+  certManager:
+    enabled: true
 
   # Ingress controllers
   ingressNginxControllers:
@@ -149,16 +153,6 @@ kubernetes:
         block-cidrs: ""
         block-user-agents: ""
         block-referers: ""
-
-  # Certificate managers
-  certManager:
-    enabled: true
-
-  # Platforms
-  istio:
-    enabled: false
-  knative:
-    enabled: false # Using Google Cloud Run
 
   # TIP: You can install more infrastructure apps on your Kubernetes with:
   # https://github.com/TaitoUnited/infra-apps-template

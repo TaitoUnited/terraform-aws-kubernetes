@@ -86,12 +86,6 @@ variable "kubernetes" {
     certManager = object({
       enabled = bool
     })
-    istio = object({
-      enabled = bool
-    })
-    knative = object({
-      enabled = bool
-    })
   })
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
 }

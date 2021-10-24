@@ -68,6 +68,9 @@ variable "kubernetes" {
   type = object({
     name = string
     version = string
+    # Network
+    masterAuthorizedNetworks = list(string)
+    # Pools
     nodePools = list(object({
       instanceType = string
       minNodeCount = number

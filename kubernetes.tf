@@ -19,7 +19,7 @@ locals {
     for pool in local.kubernetes.nodePools:
     {
       name                 = "default_worker_group"
-      instance_type        = pool.machineType
+      instance_type        = pool.instanceType
       subnets              = var.private_subnets
       asg_desired_capacity = pool.minNodeCount
       asg_min_size         = pool.minNodeCount
@@ -29,7 +29,7 @@ locals {
 }
 
 resource "aws_iam_policy" "node" {
-  name = "${local.kubernetes}-node"
+  name = "${local.kubernetes.name}-node"
 
   policy = <<EOF
 {
@@ -72,6 +72,20 @@ resource "aws_security_group" "kubernetes_node" {
   tags = local.tags
 }
 
+data "aws_eks_cluster" "kubernetes" {
+  name = module.kubernetes[0].cluster_id
+}
+
+data "aws_eks_cluster_auth" "kubernetes" {
+  name = module.kubernetes[0].cluster_id
+}
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.kubernetes.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.kubernetes.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.kubernetes.token
+}
+
 module "kubernetes" {
   count                                = local.kubernetes != "" ? 1 : 0
 
@@ -85,6 +99,10 @@ module "kubernetes" {
   worker_groups                        = local.worker_groups
   worker_additional_security_group_ids = [aws_security_group.kubernetes_node.id]
   # workers_group_defaults               = local.workers_group_defaults
+
+  cluster_endpoint_private_access      = length(local.kubernetes.masterAuthorizedNetworks) == 0
+  cluster_endpoint_public_access       = length(local.kubernetes.masterAuthorizedNetworks) > 0
+  cluster_endpoint_public_access_cidrs = local.kubernetes.masterAuthorizedNetworks
 
   map_accounts = var.additional_accounts
 

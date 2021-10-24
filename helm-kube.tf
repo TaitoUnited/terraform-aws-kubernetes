@@ -22,7 +22,7 @@ resource "helm_release" "metrics_server" {
   name       = "metrics-server"
   namespace  = "kube-system"
   repository = "https://charts.bitnami.com/bitnami"
-  chart      = "bitnami/metrics-server"
+  chart      = "metrics-server"
   version    = var.metrics_server_version
   wait       = false
 

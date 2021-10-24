@@ -95,11 +95,15 @@ permissions:
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/
 kubernetes:
   name: zone1-common-kube1
-  version: "1.17"
+  version: "1.20"
+
+  # Network
+  masterAuthorizedNetworks:
+    - 0.0.0.0/0
 
   # Node pools
   nodePools:
-    - instanceType: n1-standard-1
+    - instanceType: t3.medium
       minNodeCount: 1
       maxNodeCount: 1
 

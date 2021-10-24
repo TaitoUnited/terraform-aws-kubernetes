@@ -38,7 +38,7 @@ resource "helm_release" "postgres_proxy" {
 
   set {
     name  = "tunnel.host"
-    value = data.aws_db_instance.postgresql[each.key].endpoint
+    value = data.aws_db_instance.postgresql[each.key].address
   }
 
   set {
@@ -60,7 +60,7 @@ resource "helm_release" "mysql_proxy" {
 
   set {
     name  = "tunnel.host"
-    value = data.aws_db_instance.mysql[each.key].endpoint
+    value = data.aws_db_instance.mysql[each.key].address
   }
 
   set {
